@@ -1,0 +1,60 @@
+{
+  "name": "agentforge-on-somnia",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "packages/agents/*",
+    "contracts/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm:dev:*\"",
+    "dev:registry": "cd packages/registry && npx tsx src/server.ts",
+    "dev:oracle": "cd packages/agents/somnia-oracle && npx tsx src/server.ts",
+    "dev:webintel": "cd packages/agents/web-intel && npx tsx src/server.ts",
+    "dev:webintel2": "cd packages/agents/web-intel-v2 && npx tsx src/server.ts",
+    "dev:analysis": "cd packages/agents/analysis && npx tsx src/server.ts",
+    "dev:reporter": "cd packages/agents/reporter && npx tsx src/server.ts",
+    "dev:orchestrator": "cd packages/orchestrator && npx tsx src/server.ts",
+    "build:dashboard": "cd packages/dashboard && ../../node_modules/.bin/vite build",
+    "build:orchestrator": "npx esbuild packages/orchestrator/src/server.ts --bundle --platform=node --format=esm --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\" --outfile=packages/orchestrator/dist/server.js",
+    "build:registry": "npx esbuild packages/registry/src/server.ts --bundle --platform=node --format=esm --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\" --outfile=packages/registry/dist/server.js",
+    "build:oracle": "npx esbuild packages/agents/somnia-oracle/src/server.ts --bundle --platform=node --format=esm --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\" --outfile=packages/agents/somnia-oracle/dist/server.js",
+    "build:webintel": "npx esbuild packages/agents/web-intel/src/server.ts --bundle --platform=node --format=esm --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\" --outfile=packages/agents/web-intel/dist/server.js",
+    "build:webintel2": "npx esbuild packages/agents/web-intel-v2/src/server.ts --bundle --platform=node --format=esm --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\" --outfile=packages/agents/web-intel-v2/dist/server.js",
+    "build:analysis": "npx esbuild packages/agents/analysis/src/server.ts --bundle --platform=node --format=esm --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\" --outfile=packages/agents/analysis/dist/server.js",
+    "build:reporter": "npx esbuild packages/agents/reporter/src/server.ts --bundle --platform=node --format=esm --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\" --outfile=packages/agents/reporter/dist/server.js",
+    "contracts:compile": "cd contracts/escrow && npx hardhat compile",
+    "contracts:test": "cd contracts/escrow && npx hardhat test",
+    "contracts:deploy": "cd contracts/escrow && npx hardhat run scripts/deploy.ts --network somniaTestnet",
+    "contracts:deploy:full": "cd contracts/escrow && npx hardhat run scripts/deploy-full.ts --network somniaTestnet",
+    "start": "bash scripts/start.sh",
+    "stop": "bash scripts/stop.sh",
+    "bootstrap": "npx tsx scripts/bootstrap.ts",
+    "escrow-roundtrip": "npx tsx scripts/escrow-roundtrip.ts"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.1.2",
+    "@nomicfoundation/hardhat-ethers": "^3.1.3",
+    "@nomicfoundation/hardhat-ignition": "^0.15.16",
+    "@nomicfoundation/hardhat-ignition-ethers": "^0.15.17",
+    "@nomicfoundation/hardhat-network-helpers": "^1.1.2",
+    "@nomicfoundation/hardhat-verify": "^2.1.3",
+    "@nomicfoundation/ignition-core": "^0.15.15",
+    "@typechain/ethers-v6": "^0.5.1",
+    "@typechain/hardhat": "^9.1.0",
+    "@types/chai": "^4.3.20",
+    "@types/mocha": "^10.0.10",
+    "chai": "^4.5.0",
+    "concurrently": "^8.2.0",
+    "esbuild": "^0.25.0",
+    "hardhat-gas-reporter": "^1.0.10",
+    "solidity-coverage": "^0.8.17",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.0",
+    "typechain": "^8.3.2",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "valtio": "^1.13.0"
+  }
+}

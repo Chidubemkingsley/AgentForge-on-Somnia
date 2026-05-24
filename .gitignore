@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+wallets.json
+data/
+logs/
+*.log
+.DS_Store
+packages/dashboard/dist/
+packages/orchestrator/public/
+scripts/tw-api-test.ts
+.claude/

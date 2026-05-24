@@ -1,0 +1,145 @@
+# AgentForge-on-Somnia — Render deployment blueprint
+# https://render.com/docs/blueprint-spec
+#
+# Deploy order: registry first, then agents, then orchestrator.
+# After first deploy, fill in all URLs marked "← UPDATE" with the real
+# .onrender.com addresses, then redeploy.
+
+services:
+
+  # ── 1. Agent Registry ───────────────────────────────────────────────────────
+  - type: web
+    name: agentforge-registry
+    runtime: node
+    plan: free
+    buildCommand: npm install --include=dev && npm run build:registry
+    startCommand: node packages/registry/dist/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  # ── 2. Orchestrator (serves the React dashboard SPA) ────────────────────────
+  - type: web
+    name: agentforge-orchestrator
+    runtime: node
+    plan: free
+    buildCommand: npm install --include=dev && npm run build:dashboard && npm run build:orchestrator
+    startCommand: node packages/orchestrator/dist/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: REGISTRY_URL
+        value: https://agentforge-registry.onrender.com
+      - key: SOMNIA_RPC_URL
+        value: https://api.infra.testnet.somnia.network
+      - key: GROQ_API_KEY
+        sync: false
+      - key: NEXT_PUBLIC_PRIVY_APP_ID
+        sync: false
+      - key: PLATFORM_PRIVATE_KEY
+        sync: false
+      - key: VERIFIER_PRIVATE_KEY
+        sync: false
+      - key: ARBITER_PRIVATE_KEY
+        sync: false
+      - key: USDC_CONTRACT_ADDRESS
+        value: 0x214e2316EAEeE24c1dc5d8433329fFC7544DA331
+      - key: ESCROW_CONTRACT_ADDRESS
+        value: 0x553091386a1Cf46EA616F9Ba6f7Bf025eb5c2D41
+
+  # ── 3. SomniaOracle ─────────────────────────────────────────────────────────
+  - type: web
+    name: agentforge-somnia-oracle
+    runtime: node
+    plan: free
+    buildCommand: npm install --include=dev && npm run build:oracle
+    startCommand: node packages/agents/somnia-oracle/dist/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: REGISTRY_URL
+        value: https://agentforge-registry.onrender.com
+      - key: SOMNIA_ORACLE_SELF_URL
+        value: https://agentforge-somnia-oracle.onrender.com
+      - key: SOMNIA_ORACLE_PRIVATE_KEY
+        sync: false
+      - key: SOMNIA_RPC_URL
+        value: https://api.infra.testnet.somnia.network
+      - key: GROQ_API_KEY
+        sync: false
+
+  # ── 4. WebIntel ─────────────────────────────────────────────────────────────
+  - type: web
+    name: agentforge-web-intel
+    runtime: node
+    plan: free
+    buildCommand: npm install --include=dev && npm run build:webintel
+    startCommand: node packages/agents/web-intel/dist/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: REGISTRY_URL
+        value: https://agentforge-registry.onrender.com
+      - key: WEB_INTEL_SELF_URL
+        value: https://agentforge-web-intel.onrender.com
+      - key: WEB_INTEL_PRIVATE_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+
+  # ── 5. WebIntel v2 ──────────────────────────────────────────────────────────
+  - type: web
+    name: agentforge-web-intel-v2
+    runtime: node
+    plan: free
+    buildCommand: npm install --include=dev && npm run build:webintel2
+    startCommand: node packages/agents/web-intel-v2/dist/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: REGISTRY_URL
+        value: https://agentforge-registry.onrender.com
+      - key: WEB_INTEL_V2_SELF_URL
+        value: https://agentforge-web-intel-v2.onrender.com
+      - key: WEB_INTEL_V2_PRIVATE_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+
+  # ── 6. Analysis agent ───────────────────────────────────────────────────────
+  - type: web
+    name: agentforge-analysis
+    runtime: node
+    plan: free
+    buildCommand: npm install --include=dev && npm run build:analysis
+    startCommand: node packages/agents/analysis/dist/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: REGISTRY_URL
+        value: https://agentforge-registry.onrender.com
+      - key: ANALYSIS_AGENT_SELF_URL
+        value: https://agentforge-analysis.onrender.com
+      - key: ANALYSIS_AGENT_PRIVATE_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+
+  # ── 7. Reporter agent ───────────────────────────────────────────────────────
+  - type: web
+    name: agentforge-reporter
+    runtime: node
+    plan: free
+    buildCommand: npm install --include=dev && npm run build:reporter
+    startCommand: node packages/agents/reporter/dist/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: REGISTRY_URL
+        value: https://agentforge-registry.onrender.com
+      - key: REPORT_AGENT_SELF_URL
+        value: https://agentforge-reporter.onrender.com
+      - key: REPORT_AGENT_PRIVATE_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
