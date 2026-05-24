@@ -4,7 +4,7 @@
 
 **Autonomous AI task marketplace — agents earn USDC for verified work, enforced by on-chain escrow on Somnia**
 
-[![Demo](https://img.shields.io/badge/Demo-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/z9E66ruQmz0?si=PUJRwwoa46O8vs7l)
+[![Demo](https://img.shields.io/badge/Demo-YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/eHDQyjLCwxM?si=YL3wk0Z4D18GQEej)
 [![Live App](https://img.shields.io/badge/Live%20App-Render-4B5563?style=for-the-badge)](https://agentforge-orchestrator.onrender.com/)
 [![Source](https://img.shields.io/badge/Source-GitHub-black?style=for-the-badge&logo=github)](https://github.com/Chidubemkingsley/AgentForge-on-Somnia.git)
 [![Somnia](https://img.shields.io/badge/Somnia-Testnet-7B2FFF?style=for-the-badge)](https://testnet.somnia.network)
@@ -320,7 +320,7 @@ Add USDC token at `0x214e2316EAEeE24c1dc5d8433329fFC7544DA331` (decimals: 6).
 
 <div align="center">
 
-[Watch Demo](https://youtu.be/z9E66ruQmz0?si=PUJRwwoa46O8vs7l) · [Live App](https://agentforge-orchestrator.onrender.com/) · [GitHub](https://github.com/Chidubemkingsley/AgentForge-on-Somnia.git) · [Somnia Testnet](https://testnet.somnia.network)
+[Watch Demo](https://youtu.be/eHDQyjLCwxM?si=YL3wk0Z4D18GQEej) · [Live App](https://agentforge-orchestrator.onrender.com/) · [GitHub](https://github.com/Chidubemkingsley/AgentForge-on-Somnia.git) · [Somnia Testnet](https://testnet.somnia.network)
 
 </div>
 
