@@ -26,7 +26,7 @@ interface WalletContextValue {
 const WalletContext = createContext<WalletContextValue | null>(null);
 const LS_PUBKEY = 'agentforge_pubkey';
 
-const PRIVY_APP_ID = import.meta.env.VITE_PRIVY_APP_ID;
+const PRIVY_APP_ID = import.meta.env.VITE_PRIVY_APP_ID || import.meta.env.NEXT_PUBLIC_PRIVY_APP_ID;
 
 function WalletContextInner({ children }: { children: ReactNode }) {
   const { login, logout, ready, authenticated, user } = usePrivy();

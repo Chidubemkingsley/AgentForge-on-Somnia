@@ -13,6 +13,16 @@ const PORT = parseInt(process.env.REGISTRY_PORT || process.env.PORT || '4000', 1
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (_req, res) => {
+  const agents = loadAgents();
+  res.json({
+    service: 'AgentForge Registry',
+    status: 'running',
+    agent_count: agents.length,
+    endpoints: ['GET /', 'GET /health', 'POST /register', 'GET /agents', 'GET /agents/:id', 'PATCH /agents/:id', 'DELETE /agents/:id', 'POST /feedback'],
+  });
+});
+
 app.post('/register', (req, res) => {
   const body = req.body as Partial<AgentManifest> & { registered_by?: string };
 

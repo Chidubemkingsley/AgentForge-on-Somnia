@@ -34,7 +34,7 @@ services:
         value: https://api.infra.testnet.somnia.network
       - key: GROQ_API_KEY
         sync: false
-      - key: NEXT_PUBLIC_PRIVY_APP_ID
+      - key: VITE_PRIVY_APP_ID
         sync: false
       - key: PLATFORM_PRIVATE_KEY
         sync: false

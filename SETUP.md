@@ -192,7 +192,7 @@ tail -f logs/analysis.log       # agent errors
 | Variable | Description |
 |---|---|
 | `GROQ_API_KEY` | Groq API key (`llama-3.1-8b-instant`) — for planner, verifier, arbiter, agents |
-| `NEXT_PUBLIC_PRIVY_APP_ID` | Privy app ID for wallet auth |
+| `VITE_PRIVY_APP_ID` | Privy app ID for wallet auth (Vite convention) |
 | `PLATFORM_PRIVATE_KEY` | Platform wallet — signs deploy, release; receives platform fee |
 | `VERIFIER_PRIVATE_KEY` | AI Verifier wallet — holds Approver role |
 | `ARBITER_PRIVATE_KEY` | AI Arbiter wallet — holds Dispute Resolver role |
